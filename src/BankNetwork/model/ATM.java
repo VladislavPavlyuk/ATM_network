@@ -1,21 +1,50 @@
-package Bank;
+package BankNetwork.model;
 import java.util.HashMap;
 import java.util.Map;
+import BankNetwork.service.ATM.ATMPrintable;
 
 // Класс ATM
-class ATM {
+public class ATM implements BankNetwork.Interfaces.IATM {
     private Map<Integer, Integer> banknotes = new HashMap<>();
     private int minWithdrawalAmount;
     private int maxBanknotesDispensed;
+    int[] denominations = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+
+    public void setDenominations(int ... a) {
+        for (int i : a) {
+            this.denominations = new int[]{i};
+        }
+
+    }
+    //public void setDenominations(int[] denominations) {
+    //    this.denominations = denominations;
+    //}
+
+    public int[] getDenominations() {
+        return denominations;
+    }
 
     public ATM(int minWithdrawalAmount, int maxBanknotesDispensed) {
-        this.minWithdrawalAmount = minWithdrawalAmount;
-        this.maxBanknotesDispensed = maxBanknotesDispensed;
-        initializeBanknotes();
+        try {
+            if ((0 < minWithdrawalAmount) && (0 < maxBanknotesDispensed)) {
+            this.minWithdrawalAmount = minWithdrawalAmount;
+            this.maxBanknotesDispensed = maxBanknotesDispensed;
+            initializeBanknotes();
+            }
+            else
+                throw new IllegalArgumentException("Invalid minWithdrawalAmount or maxBanknotesDispensed");
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        } finally {
+            System.out.println("Finally in ATM constructor called");
+        }
     }
 
     private void initializeBanknotes() {
-        int[] denominations = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+
         for (int denomination : denominations) {
             banknotes.put(denomination, 0);
         }
@@ -62,6 +91,21 @@ class ATM {
             total += entry.getKey() * entry.getValue();
         }
         return total;
+    }
+
+    private ATMPrintable atmPrintable;
+
+    public ATM(ATMPrintable atmPrintable) {
+        this.atmPrintable = atmPrintable;
+    }
+
+    public void setATMPrintable(ATMPrintable atmPrintable) {
+        this.atmPrintable = atmPrintable;
+    }
+
+    @Override
+    public void print() {
+        atmPrintable.print(this);
     }
 
 }
