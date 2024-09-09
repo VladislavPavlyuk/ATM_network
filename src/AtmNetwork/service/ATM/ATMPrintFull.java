@@ -1,6 +1,6 @@
-package BankNetwork.service.ATM;
+package AtmNetwork.service.ATM;
 
-import BankNetwork.model.ATM;
+import AtmNetwork.model.ATM;
 
 public class ATMPrintFull implements ATMPrintable{
     @Override

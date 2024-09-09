@@ -1,7 +1,6 @@
-package BankNetwork.enums;
+package AtmNetwork.enums;
 
-
-public enum bankTypes {
+public enum BankType {
       RetailBank("Retail Bank","Banks that offer services to individuals."),
       CommercialBank("Commercial Bank","Banks designed for commercial purposes."),
       InvestmentBank("Investment Bank","Banks that manage investment portfolios."),
@@ -19,7 +18,7 @@ public enum bankTypes {
     private final String description;
 
     // Constructor
-    bankTypes(String bankType, String description) {
+    BankType(String bankType, String description) {
         this.bankType = bankType;
         this.description = description;
     }

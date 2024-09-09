@@ -1,12 +1,13 @@
-package BankNetwork.model;
+package AtmNetwork.model;
 
-import BankNetwork.Interfaces.IBank;
-import BankNetwork.service.Bank.BankPrintable;
+import AtmNetwork.Interfaces.IBank;
+import AtmNetwork.service.Bank.BankPrintable;
 
 public class Bank implements IBank {
-    public int[] atms;
     public String bankName;
     public String bankDescription;
+    public ATM atm;
+    public ATM[] atms;
 
     //Set methods
     public void setBankName(String bankName) {
@@ -36,7 +37,7 @@ public class Bank implements IBank {
 
     private void initializeATMs() {
         for (int i = 0; i < atms.length; i++) {
-            atms[i] = new ATM(5, 40); // Пример значений для минимальной суммы и максимального количества банкнот
+            atms[i] = new ATM(5, 100); // Пример значений для минимальной суммы и максимального количества банкнот
         }
     }
 

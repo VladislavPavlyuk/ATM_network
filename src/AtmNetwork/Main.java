@@ -12,14 +12,15 @@
 необходимости.
  */
 
-package BankNetwork;
+package AtmNetwork;
 
-import BankNetwork.utils.BankFactory;
+import AtmNetwork.model.Bank;
+import AtmNetwork.utils.AtmFactory;
 
 public class Main {
     public static void main(String[] args) {
 
-        BankFactory bankNetwork = new BankFactory(5,50);
-
+        AtmFactory atmFactory = new AtmFactory();
+        atmFactory.createRandomAtmNetwork();
     }
 }

@@ -1,24 +1,21 @@
-package BankNetwork.model;
+package AtmNetwork.model;
 import java.util.HashMap;
 import java.util.Map;
-import BankNetwork.service.ATM.ATMPrintable;
+import AtmNetwork.service.ATM.ATMPrintable;
 
 // Класс ATM
-public class ATM implements BankNetwork.Interfaces.IATM {
+public class ATM implements AtmNetwork.Interfaces.IATM {
     private Map<Integer, Integer> banknotes = new HashMap<>();
     private int minWithdrawalAmount;
     private int maxBanknotesDispensed;
     int[] denominations = {1, 2, 5, 10, 20, 50, 100, 200, 500};
 
-    public void setDenominations(int ... a) {
+    @Override
+    public void setDenominations(int... a) {
         for (int i : a) {
             this.denominations = new int[]{i};
         }
-
     }
-    //public void setDenominations(int[] denominations) {
-    //    this.denominations = denominations;
-    //}
 
     public int[] getDenominations() {
         return denominations;
@@ -44,7 +41,6 @@ public class ATM implements BankNetwork.Interfaces.IATM {
     }
 
     private void initializeBanknotes() {
-
         for (int denomination : denominations) {
             banknotes.put(denomination, 0);
         }
@@ -58,9 +54,6 @@ public class ATM implements BankNetwork.Interfaces.IATM {
         }
     }
 
-    public void depositMoney(int denomination, int count) {
-        loadMoney(denomination, count);
-    }
 
     public void withdrawMoney(int amount) {
         if (amount < minWithdrawalAmount) {
@@ -107,5 +100,4 @@ public class ATM implements BankNetwork.Interfaces.IATM {
     public void print() {
         atmPrintable.print(this);
     }
-
 }
